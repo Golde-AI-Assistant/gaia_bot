@@ -47,7 +47,7 @@ class ConsoleManager:
 
     @staticmethod
     def _clear():
-        clear = lambda: os.system('cls' if os.name == 'window' else 'clear')
+        clear = lambda: os.system('clear' if os.name == 'posix' else 'cls')
         return clear()
         
 
