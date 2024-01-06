@@ -12,12 +12,13 @@ class AuthenticationConnector:
         self.username = username
         self.password = password 
         self.auth_bash = PORTS['authentication_service']['shell_path']
-        self.microservice_state = CallMicroservices(self.auth_bash, self.gaia_url)
         
         # instances
         self.gaia_port = PORTS['gaia_connector']['port']
         self.router = PORTS['authentication_service']['router']
         self.gaia_url = f"http://{DOMAIN}:{self.gaia_port}/{self.router}"
+        
+        self.microservice_state = CallMicroservices(self.auth_bash, self.gaia_url) 
     
     def activate_authentication_command(self):
         self.microservice_state.activate_service()
@@ -34,9 +35,10 @@ class AuthenticationConnector:
         
         if response.status_code == 200:
             result = response.json()
+            body = result['response']
             self._save_response_to_file(result['response'])
             if result['authenticated']:
-                token = result['response']['data']['accessToken']
+                token = body['data']['signin']['accessToken']
                 return f"Authenticated successfully. Token: {token}"
         else:
             return "Invalid credentials"

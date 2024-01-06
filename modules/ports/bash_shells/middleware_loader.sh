@@ -3,7 +3,7 @@
 # create a lock file
 touch /tmp/middleware_loader_lock
 
-cd ../middleware_loader/server
+cd ../middleware_loader
 
 go run cmd/graphqlserver/main.go
 
