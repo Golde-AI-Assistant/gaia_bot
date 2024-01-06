@@ -82,7 +82,8 @@ PORT_COMPONENTS = [
     "gaia_connector",
     "authentication_service",
     "task_manager",
-    "client_gui"
+    "client_gui",
+    "middleware_loader",
 ]
 
 DOMAIN = "localhost"
